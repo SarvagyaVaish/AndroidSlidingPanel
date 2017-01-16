@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class Page1Fragment extends Fragment {
 
-    Button nextPageButton;
+    Button launchActivity;
+    Button replaceFragment;
 
     public Page1Fragment() {
         // Required empty public constructor
@@ -23,12 +23,27 @@ public class Page1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_page1, container, false);
 
-        nextPageButton = (Button) rootView.findViewById(R.id.next_page_button);
-        nextPageButton.setOnClickListener(new View.OnClickListener() {
+        launchActivity = (Button) rootView.findViewById(R.id.launch_activity);
+        launchActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Page2Activity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+            }
+        });
+
+        replaceFragment = (Button) rootView.findViewById(R.id.replace_fragment);
+        replaceFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Page2Fragment fragment = new Page2Fragment();
+                getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.page_content, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

@@ -15,9 +15,15 @@
         android:text="Page 1" />
 
     <Button
-        android:id="@+id/next_page_button"
+        android:id="@+id/launch_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next" />
+        android:text="Launch Activity" />
+
+    <Button
+        android:id="@+id/replace_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Replace Fragment" />
 
 </LinearLayout>
